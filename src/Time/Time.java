@@ -121,6 +121,28 @@ public class Time {
         return new Time();
     }
 
+    
+    public  LocalDate addMonth(LocalDate localDate, int add) {
+        
+        Date date = localDateConverter.toDate(localDate);
+        
+        CALENDAR.setTime(date);
+        
+        CALENDAR.add(Calendar.MONTH, add);
+    
+        return localDateConverter.fromDate(CALENDAR.getTime());
+    }
+    
+    public void addMonth(int add) {
+        
+        Date date = localDateConverter.toDate(localDate);
+        
+        CALENDAR.setTime(date);
+        
+        CALENDAR.add(Calendar.MONTH, add);
+    
+        setLocalDate(localDateConverter.fromDate(CALENDAR.getTime()));
+    }
  
 
     @Override
@@ -149,6 +171,8 @@ public class Time {
        
         return localDateConverter.toDate(localDate);
     }
+    
+    
       
       //Getters and Setters
       

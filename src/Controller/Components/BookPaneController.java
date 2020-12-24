@@ -24,42 +24,38 @@ public class BookPaneController {
     private final BookPane view;
     private final Book book;
     private final ListOfBooks father;
-    private MouseListener MouseSelectListener;
+    private final MouseListener eventListener;
+    private final MouseListener selectPane;
 
-    public BookPaneController(BookPane view, Book book, ListOfBooks father) {
+    public BookPaneController(BookPane view, Book book, MouseListener event,ListOfBooks father) {
      
         this.view = view;
         this.book = book;
         this.father = father;
+
+        this.eventListener = event;
         
-        this.MouseSelectListener = new MouseListener() {
-            
+        this.selectPane = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-             
-                ListOfBooks.setSelectedBookPane(view);
-                father.getController().loadDetails();
+             ListOfBooks.setSelectedBookPane(view);
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-           
-            }
+             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-              
-            }
+             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-            
-            }
+             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-            
-            }
+             }
         };
     }
 
@@ -115,11 +111,13 @@ public class BookPaneController {
 
     private void selectListener() {
     
-        view.addMouseListener(MouseSelectListener);
+        view.addMouseListener(eventListener);
+        view.addMouseListener(selectPane);
         
          for(Component comp: view.getComponents()){
              
-             comp.addMouseListener(MouseSelectListener);
+             comp.addMouseListener(selectPane);
+             comp.addMouseListener(eventListener);
          }
     }
 }

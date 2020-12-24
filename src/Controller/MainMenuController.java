@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import Model.Book;
+import Model.User;
 import View.Researchers.ListOfBooks;
 import View.MainMenu;
+import View.Rent.RentWindow;
 
 /**
  *
@@ -14,17 +17,31 @@ import View.MainMenu;
  */
 public class MainMenuController {
     
-    private final MainMenu view;
+    public static MainMenu view;
+    public static RentWindow RENT_WINDOW;
 
     public MainMenuController(MainMenu view) {
-        this.view = view;
+        
+        MainMenuController.view = view;
+        
     }
-
-    public void openBookList() {
+    
+    public static void openBookList() {
    
         ListOfBooks bookList = new ListOfBooks();
+        
         bookList.setVisible(true);
-        view.getDesktop().add(bookList);
+        
+        MainMenuController.view.getDesktop().add(bookList);
+    }
+
+    public static void OpenRent(Book book, User user) {
+       
+        MainMenuController.RENT_WINDOW = new RentWindow(book, user);
+   
+        MainMenuController.RENT_WINDOW.setVisible(true);
+        
+        MainMenuController.view.getDesktop().add(MainMenuController.RENT_WINDOW);
     }
     
     
